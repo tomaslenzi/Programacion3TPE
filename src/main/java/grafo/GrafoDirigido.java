@@ -2,6 +2,23 @@ package main.java.grafo;
 
 import java.util.*;
 
+/*
+Para implementar la estructura de almacenamiento de vertices y arcos, se utilizo un
+'Map<Integer, List<Arco<T>>>' llamado 'listaAdyacencia'.
+
+El 'Map' se utiliza para asociar cada vertice con una lista de arcos que representan sus
+conexiones con otros vértices. La clave del Map es el identificador único del vertice
+(valor entero) y el valor correspondiente es una lista de arcos.
+
+La lista de arcos permite almacenar multiples arcos salientes desde un mismo vertice.
+Cada arco contiene informacion sobre el vertice de destino y cualquier otra etiqueta o
+información adicional asociada a la conexión.
+
+Esta estructura de implementacion permite acceder rapidamente a los arcos de un vértice
+específico y manejar multiples conexiones entre los vertices del grafo.
+
+ */
+
 public class GrafoDirigido<T> implements Grafo<T> {
     private Map<Integer, List<Arco<T>>> listaAdyacencia;
     private int cantVertices;
@@ -15,7 +32,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
 
     /**
      * Complejidad: O(1)
-     * ya que realiza una operacion constante de insercion en un mapa('HashMap').
+     * ya que realiza una operacion constante que implica simplemente insertar una nueva entrada en el mapa.
      */
     @Override
     public void agregarVertice(int verticeId) {
@@ -27,8 +44,9 @@ public class GrafoDirigido<T> implements Grafo<T> {
     }
 
     /**
-     * Complejidad: O(V + A)
-     * ya que recorre todos los vertices y arcos en el grafo para eliminar los arcos conectados al vertice dado.
+     * Complejidad: O(V + A), donde V es el numero de vertices y A es el numero de arcos adyacentes al vertice que se esta
+     * eliminando.
+     * Se debe recorrer la lista de adyacencia y eliminar todas las referencias a dicho vertice.
      */
     @Override
     public void borrarVertice(int verticeId) {
@@ -61,8 +79,8 @@ public class GrafoDirigido<T> implements Grafo<T> {
     }
 
     /**
-     * Complejidad: O(n)
-     * ya que recorre todos los arcos en la lista de adyacencia del vertice dado para buscar y eliminar el arco que coincide.
+     * Complejidad: O(V), donde V es el numero de vertices.
+     * se recorre la lista de adyacencia del vértice de origen y se elimina el arco correspondiente
      */
 
     @Override
@@ -91,8 +109,8 @@ public class GrafoDirigido<T> implements Grafo<T> {
     }
 
     /**
-     * Complejidad: O(n)
-     * donde n es la cantidad de arcos en la lista de adyacencia del vertice dado.
+     * Complejidad: O(n), donde n es la cantidad de arcos en la lista de adyacencia del vertice dado.
+     * El metodo existeArco verifica si existe un arco entre dos vertices dados.
      */
 
     @Override
@@ -112,6 +130,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
     /**
      * Complejidad: O(n)
      * donde n es la cantidad de arcos en la lista de adyacencia del vertice dado.
+     * El metodo obtenerArco obtiene un arco especifico entre dos vertices dados.
      */
 
     @Override
@@ -167,8 +186,8 @@ public class GrafoDirigido<T> implements Grafo<T> {
     }
 
     /**
-     * Complejidad: O(n)
-     * donde n es la cantidad de arcos en la lista de adyacencia del vertice dado.
+     * Complejidad: O(n), donde n es la cantidad de arcos en la lista de adyacencia del vertice dado.
+     * Devuelve un iterador sobre los vertices adyacentes al vertice dado
      */
 
     @Override
@@ -189,8 +208,8 @@ public class GrafoDirigido<T> implements Grafo<T> {
 
 
     /**
-     * Complejidad: O(n)
-     * donde n es la cantidad total de arcos en todas las listas de adyacencia.
+     * Complejidad: O(n), donde n es la cantidad total de arcos en todas las listas de adyacencia.
+     * Devuelve un iterador sobre todos los arcos del grafo.
      */
     @Override
     public Iterator<Arco<T>> obtenerArcos() {
@@ -202,8 +221,8 @@ public class GrafoDirigido<T> implements Grafo<T> {
     }
 
     /**
-     * Complejidad: O(n)
-     * donde n es la cantidad de arcos en la lista de adyacencia del vértice dado.
+     * Complejidad: O(n), donde n es la cantidad de arcos en la lista de adyacencia del vértice dado.
+     * Devuelve un iterador sobre los arcos del vértice dado.
      */
 
     @Override

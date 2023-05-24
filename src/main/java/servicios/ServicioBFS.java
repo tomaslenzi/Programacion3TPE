@@ -4,6 +4,13 @@ import main.java.grafo.Grafo;
 
 import java.util.*;
 
+/**
+ * Esta clase implementa un servicio para realizar el recorrido BFS (Breadth-First Search)
+ * en un grafo dado. Utiliza una instancia de la clase Grafo para realizar el recorrido.
+ * El resultado del recorrido es una lista de enteros que representa el orden en el que
+ * se visitan los vertices del grafo.
+ */
+
 
 public class ServicioBFS<T> {
     private Grafo<T> grafo;
@@ -11,6 +18,13 @@ public class ServicioBFS<T> {
     public ServicioBFS(Grafo<T> grafo) {
         this.grafo = grafo;
     }
+
+    /**
+     * Complejidad: O(V + A), donde V es el numero de vertices y A el numero de arcos
+     * Itera sobre todos los vértices del grafo una vez, y en cada iteración ejecuta el método bfs() que tiene una
+     * complejidad de O(V + A).
+     * Cuando termina retorna una lista de enteros que representa el orden de visita de los vertices.
+     */
 
     public List<Integer> bfsForest() {
         List<Integer> visitados = new ArrayList<>();
@@ -29,6 +43,14 @@ public class ServicioBFS<T> {
         return visitados;
     }
 
+    /**
+     * Complejidad: es O(V + A). Ya que recorre los vertices adyacentes al vertice actual y los encola
+     * en la cola. En el peor de los caso, se recorreran todos los vertices y arcos del grafo.
+     *
+     * Realiza el recorrido BFS en el grafo comenzando desde el vértice dado.
+     * Actualiza el conjunto de vertices visitados y la lista de visitados
+     * con el orden en el que se visitan los vertices.
+     */
     private void bfs(int vertice, Set<Integer> visitado, List<Integer> visitados) {
         Queue<Integer> cola = new LinkedList<>();
         cola.offer(vertice);
